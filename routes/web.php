@@ -4,16 +4,16 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssignUserRole;
 
 
-use App\Livewire\CompanyIndex;
-use App\Livewire\EpisodeIndex;
-use App\Livewire\GenreIndex;
-use App\Livewire\MovieIndex;
-use App\Livewire\ProducerIndex;
-use App\Livewire\SeasonIndex;
-use App\Livewire\SeriesIndex;
-use App\Livewire\TagIndex;
-use App\Livewire\Test;
-use App\livewire\CastIndex;
+
+use App\Http\Controllers\CastIndex;
+use App\Http\Controllers\CompanyIndex;
+use App\Http\Controllers\EpisodeIndex;
+use App\Http\Controllers\GenreIndex;
+use App\Http\Controllers\MovieIndex;
+use App\Http\Controllers\ProducerIndex;
+use App\Http\Controllers\SeasonIndex;
+use App\Http\Controllers\SeriesIndex;
+use App\Http\Controllers\TagIndex;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,16 +22,27 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified','role:admin'])->prefix('/admin')->name('admin.')->group(function () {
     Route::get('/',[AdminController::class, 'index'])->name('index');
-    Route::get('movies', MovieIndex::class)->name('movies.index');
-    Route::get('series', SeriesIndex::class)->name('series.index');
-    Route::get('series/{serie}/seasons', SeasonIndex::class)->name('seasons.index');
-    Route::get('series/{serie}/seasons/{season}/episodes', EpisodeIndex::class)->name('episodes.index');
-    Route::get('casts', CastIndex::class)->name('casts.index'); 
-    Route::get('genres', GenreIndex::class)->name('genres.index');
-    Route::get('tags', TagIndex::class)->name('tags.index');
-    Route::get('producers', ProducerIndex::class)->name('producers.index');
-    Route::get('companies', CompanyIndex::class)->name('companies.index');
-    Route::get('test',Test::class)->name('test.index');
+    //movies
+    Route::get('movies', [MovieIndex::class, 'index'])->name('movies.index');
+    Route::get('movies/create', [MovieIndex::class, 'create'])->name('movies.create');
+    route::post('movies', [MovieIndex::class, 'store'])->name('movies.store');
+    Route::get('movies/{id}/edit', [MovieIndex::class, 'edit'])->name('movies.edit');
+    Route::put('movies/{id}', [MovieIndex::class, 'update'])->name('movies.update');
+    Route::delete('movies/{id}', [MovieIndex::class, 'delete'])->name('movies.delete');
+    //series
+    Route::get('series', [SeriesIndex::class, 'index'])->name('series.index');
+    Route::get('series/{serie}/seasons', [SeasonIndex::class, 'index'])->name('seasons.index');
+    Route::get('series/{serie}/seasons/{season}/episodes', [EpisodeIndex::class, 'index'])->name('episodes.index');
+    //casts
+    Route::get('casts', [CastIndex::class, 'index'])->name('casts.index'); 
+    //genres
+    Route::get('genres', [GenreIndex::class, 'index'])->name('genres.index');
+    //tags
+    Route::get('tags', [TagIndex::class, 'index'])->name('tags.index');
+    //producers
+    Route::get('producers', [ProducerIndex::class, 'index'])->name('producers.index');
+    //companies
+    Route::get('companies', [CompanyIndex::class, 'index'])->name('companies.index');
 });
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {

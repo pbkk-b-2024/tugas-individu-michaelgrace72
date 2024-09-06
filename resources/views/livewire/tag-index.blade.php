@@ -27,24 +27,19 @@
 					<table class="min-w-full leading-normal">
 						<thead>
 							<tr>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
 									Title
 								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Date
 								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Release Date
 								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Rating
 								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
 									Manage
 								</th>
 							</tr>
@@ -103,4 +98,18 @@
 				</div>
 			</div>
 		</div>
-	</div></div>
+	</div>
+	<x-dialog-modal wire:model="showTagModal">
+		<x-slot name="title">
+			Title
+		</x-slot>
+		<x-slot name="content">
+			Content
+		</x-slot>
+		<x-slot name="footer">
+			<x-button wire:click="closeTagModal">
+				Cancel
+			</x-button>
+		</x-slot>
+	</x-dialog-modal>
+</div>

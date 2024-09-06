@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Livewire;
-
+use App\Models\Cast;
 use Livewire\Component;
 
 class CastIndex extends Component
 {
-    public function render()
+    public $search='';
+    public function index()
     {
-        return view('livewire.cast-index');
+        $casts= Cast::when($this->search, function($query){
+            $query->where('title','like','%'.$this->search.'%');})->paginate(5);
+        return view('cast-index', compact('casts'));
     }
 }

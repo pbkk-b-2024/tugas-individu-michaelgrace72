@@ -1,3 +1,4 @@
+<x-app-layout>
 <div>
     {{-- Because she competes with no one, no one can compete with her. --}}
     <!-- component -->
@@ -16,12 +17,14 @@
 						clip-rule="evenodd" />
 				</svg>
 				  	<form method="GET" action="{{ route('admin.movies.index')}}"> 
-							<input type="text" value="{{ request('render')}}" class="bg-gray-50 outline-none ml-1 block " name="search" placeholder="search..." >
+							<input type="text" value="{{ request('search')}}" class="bg-gray-50 outline-none ml-1 block " name="search" placeholder="search..." >
 							<button type="submit" class="btn btn-primary mt-w" value="search">search</button>
 					  </form>
           </div>
 				<div class="lg:ml-40 ml-10 space-x-8">
-                    <x-button>Create movie</x-button>
+					<form id="" action="{{ route('admin.movies.create')}}">
+            <x-button>Create movie</x-button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -74,11 +77,16 @@
 									</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-              			<span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-										<span class="relative">Edit</span>
-										<span class="relative">Delete</span>
-									</span>
+									<a  href="{{ route('admin.movies.edit', $movie->id)}}" class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight rounded-full hover:bg-green-500">
+										<span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+										<button class="relative">Edit</button>
+									</a>
+									<form id="delete-form-{{ $movie->id}}" action="{{ route('admin.movies.delete', $movie->id)}}" method="POST" class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight rounded-full hover:bg-red-500">
+										@csrf
+										@method('DELETE')
+										<span aria-hidden class="absolute inset-0 bg-red-200 opacity-50  rounded-full "></span>
+										<button onclick="" class="relative ">Delete</button>
+									</form>
 								</td>
 							</tr>@endforeach
 							
@@ -87,17 +95,9 @@
 					<div
 						class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
 						<span class="text-xs xs:text-sm text-gray-900">
-                            Showing {{ $movies->count()}} out of {{ $movies->total()}} movies
-                        </span>
 							{{ $movies->links() }}
+                        </span>
 						<div class="inline-flex mt-2 xs:mt-0">
-						<button class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l">
-                                Prev
-                            </button>
-							&nbsp; &nbsp;
-							<button class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r">
-                                Next
-                            </button>
 						</div>
 					</div>
 				</div>
@@ -105,3 +105,4 @@
 		</div>
 	</div>
 </div>
+</x-app-layout>

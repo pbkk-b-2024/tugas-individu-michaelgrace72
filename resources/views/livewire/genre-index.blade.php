@@ -56,7 +56,7 @@
 												<p class="text-gray-900 whitespace-no-wrap">
 												Title here	
 												</p>
-                                    </div>
+                  </div>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">Date here</p>
@@ -68,14 +68,12 @@
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
-                                        Rating here
+                    Rating here
 									</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<span
-                                        class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                        <span aria-hidden
-                                            class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+									<span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+										<span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
 									<span class="relative">Edit/Delete</span>
 									</span>
 								</td>
