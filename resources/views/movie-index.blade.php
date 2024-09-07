@@ -81,9 +81,10 @@
 										<span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
 										<button class="relative">Edit</button>
 									</a>
-									<form id="delete-form-{{ $movie->id}}" action="{{ route('admin.movies.delete', $movie->id)}}" method="POST" class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight rounded-full hover:bg-red-500">
+									<form id="delete-form-{{ $movie->id}}" action="{{ route('admin.movies.delete', $movie->id)}}" method="POST" class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight rounded-full hover:bg-red-500" onsubmit="return confirm('are you sure?')">
 										@csrf
 										@method('DELETE')
+
 										<span aria-hidden class="absolute inset-0 bg-red-200 opacity-50  rounded-full "></span>
 										<button onclick="" class="relative ">Delete</button>
 									</form>
@@ -95,7 +96,7 @@
 					<div
 						class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
 						<span class="text-xs xs:text-sm text-gray-900">
-							{{ $movies->links() }}
+							{{ $movies->onEachSide(1)->links() }}
                         </span>
 						<div class="inline-flex mt-2 xs:mt-0">
 						</div>

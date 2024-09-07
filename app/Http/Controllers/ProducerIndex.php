@@ -18,6 +18,5 @@ class ProducerIndex extends Controller
 
         // Send data to the view
         return view('producer-index', compact('producers'));
-
     }
 }

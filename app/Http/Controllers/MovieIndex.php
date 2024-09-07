@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
-
+use Livewire\WithPagination;
 class MovieIndex extends Controller
 {
     public $search='';
-
     public function index(Request $request)
     {
         $search = $request->input('search');

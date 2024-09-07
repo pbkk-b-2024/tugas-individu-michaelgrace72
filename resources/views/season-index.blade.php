@@ -51,56 +51,55 @@
 							</tr>
 						</thead>
 						<tbody>
+							@foreach ($seasons as $season)
+							
 							<tr>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<div class="flex items-center ml-3">
 												<p class="text-gray-900 whitespace-no-wrap">
-												Title here	
+												{{ $producer->tmdb_id }}	
 												</p>
-                                    </div>
+									</div>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">Date here</p>
+									<p class="text-gray-900 whitespace-no-wrap">{{ $producer->name}}</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
-										Release Date here
+									{{ $producer->role }}	
 									</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
-                                        Rating here
+									{{ $producer->poster_path}}
 									</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<span
-                                        class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                        <span aria-hidden
-                                            class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-									<span class="relative">Edit/Delete</span>
-									</span>
+									<a  href="" class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight rounded-full hover:bg-green-500">
+										<span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+										<button class="relative">Edit</button>
+									</a>
+									<form id="" action="" method="POST" class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight rounded-full hover:bg-red-500" onsubmit="return confirm('are you sure?')">
+										@csrf
+										@method('DELETE')
+
+										<span aria-hidden class="absolute inset-0 bg-red-200 opacity-50  rounded-full "></span>
+										<button onclick="" class="relative ">Delete</button>
+									</form>
 								</td>
-							</tr>
+							</tr>@endforeach
 							
 						</tbody>
 					</table>
 					<div
 						class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
 						<span class="text-xs xs:text-sm text-gray-900">
-                            Showing 1 to 4 of 50 Entries
+							{{ $seasons->onEachSide(1)->links() }}
                         </span>
 						<div class="inline-flex mt-2 xs:mt-0">
-							<button
-                                class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l">
-                                Prev
-                            </button>
-							&nbsp; &nbsp;
-							<button
-                                class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r">
-                                Next
-                            </button>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
