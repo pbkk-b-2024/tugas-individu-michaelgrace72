@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
         // Producer::factory()->count(10)->create();
         // Company::factory()->count(5)->create();
         // Genre::factory()->count(30)->create();
-        Tag::factory()->count(30)->create();
+        // Tag::factory()->count(30)->create();
+        $this->call(RoleSeeder::class);
     }
 }

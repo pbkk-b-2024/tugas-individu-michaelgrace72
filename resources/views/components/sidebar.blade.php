@@ -19,7 +19,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
             </svg>
 
-            <span class="mx-3">Dashboard</span>
+            <span class="mx-3">Admin Dashboard</span>
         </a>
 
         <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('admin.movies.index')}}">

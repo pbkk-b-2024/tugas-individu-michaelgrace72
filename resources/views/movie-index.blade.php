@@ -18,14 +18,15 @@
 				</svg>
 				  	<form method="GET" action="{{ route('admin.movies.index')}}"> 
 							<input type="text" value="{{ request('search')}}" class="bg-gray-50 outline-none ml-1 block " name="search" placeholder="search..." >
-							<button type="submit" class="btn btn-primary mt-w" value="search">search</button>
 					  </form>
           </div>
+				@role('admin')
 				<div class="lg:ml-40 ml-10 space-x-8">
 					<form id="" action="{{ route('admin.movies.create')}}">
             <x-button>Create movie</x-button>
 					</form>
 				</div>
+				@endrole
 			</div>
 		</div>
 		<div>
@@ -46,9 +47,11 @@
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                   Rating
 								</th>
+								@role('admin')
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
 									Manage
 								</th>
+								@endrole
 							</tr>
 						</thead>
 						<tbody>
@@ -76,6 +79,7 @@
 									{{ $movie->rating}}
 									</p>
 								</td>
+								@role('admin')
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<a  href="{{ route('admin.movies.edit', $movie->id)}}" class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight rounded-full hover:bg-green-500">
 										<span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
@@ -89,6 +93,7 @@
 										<button onclick="" class="relative ">Delete</button>
 									</form>
 								</td>
+								@endrole
 							</tr>@endforeach
 							
 						</tbody>
