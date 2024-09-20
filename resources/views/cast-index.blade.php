@@ -75,9 +75,9 @@
 									</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">
-									{{ $cast->poster_path}}
-									</p>
+									<img class="w-20 h-28 border-slate-700 rounded hover:shadow-slate-600 hover:scale-110 text-gray-900 whitespace-no-wrap" src="https://image.tmdb.org/t/p/w500{{ $cast->poster_path}}">
+									
+									</img>
 								</td>
 								@role('admin')
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">

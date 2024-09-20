@@ -15,13 +15,13 @@
 						d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
 						clip-rule="evenodd" />
 				</svg>
-				<form method="GET" action="{{ route('admin.producer.index')}}"> 
-							<input type="text" value="{{ request('search')}}" class="bg-gray-50 outline-none ml-1 block " name="search" placeholder="search..." >
+				<form method="GET" action=""> 
+							<input type="text" value="" class="bg-gray-50 outline-none ml-1 block " name="search" placeholder="search..." >
 					  </form>
           </div>
 				<div class="lg:ml-40 ml-10 space-x-8">
-           <form id="" action="{{ route('admin.producer.create')}}">
-            <x-button>Create movie</x-button>
+           <form id="" action="{{ route('admin.seasons.create', $seriesID )}}">
+            <x-button>Add Season</x-button>
 					</form>
 				</div>
 			</div>
@@ -32,24 +32,16 @@
 					<table class="min-w-full leading-normal">
 						<thead>
 							<tr>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									Title
+								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+									Season number
 								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Date
+								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Poster
 								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Release Date
+								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Release Date
 								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Rating
-								</th>
-								<th
-									class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
 									Manage
 								</th>
 							</tr>
@@ -61,29 +53,24 @@
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<div class="flex items-center ml-3">
 												<p class="text-gray-900 whitespace-no-wrap">
-												{{ $producer->tmdb_id }}	
+												{{ $season->tmdb_id }}	
 												</p>
 									</div>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">{{ $producer->name}}</p>
+									<p class="text-gray-900 whitespace-no-wrap">{{ $season->name}}</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
-									{{ $producer->role }}	
+									{{ $season->poster_path}}
 									</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">
-									{{ $producer->poster_path}}
-									</p>
-								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<a  href="{{ route('admin.producer.edit', $producer->id)}}" class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight rounded-full hover:bg-green-500">
+									<a  href="" class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight rounded-full hover:bg-green-500">
 										<span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
 										<button class="relative">Edit</button>
 									</a>
-									<form id="delte-form{{$movie->id}}" action="{{ route('admin.producer.delete', $producer->id)}}" method="POST" class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight rounded-full hover:bg-red-500" onsubmit="return confirm('are you sure?')">
+									<form id="" action="" method="POST" class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight rounded-full hover:bg-red-500" onsubmit="return confirm('are you sure?')">
 										@csrf
 										@method('DELETE')
 
@@ -99,7 +86,7 @@
 						class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
 						<span class="text-xs xs:text-sm text-gray-900">
 							{{ $seasons->onEachSide(1)->links() }}
-                        </span>
+            </span>
 						<div class="inline-flex mt-2 xs:mt-0">
 						</div>
 					</div>
