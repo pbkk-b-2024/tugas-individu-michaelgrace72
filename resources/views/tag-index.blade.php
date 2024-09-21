@@ -43,11 +43,9 @@
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                   Slug
 								</th>
-								@role('admin')
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
 									Manage
 								</th>
-								@endrole
 							</tr>
 						</thead>
 						<tbody>
@@ -71,8 +69,12 @@
 									{{ $tag->slug}}
 									</p>
 								</td>
-								@role('admin')
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+									<a  href="{{route('admin.tags.show', $tag->id)}}" class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight rounded-full hover:bg-slate-500">
+										<span aria-hidden class="absolute inset-0 bg-slate-200 opacity-50 rounded-full"></span>
+										<button class="relative">Details</button>
+									</a>
+								@role('admin')
 									<a  href="{{route('admin.tags.edit', $tag->id)}}" class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight rounded-full hover:bg-green-500">
 										<span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
 										<button class="relative">Edit</button>
@@ -84,8 +86,8 @@
 										<span aria-hidden class="absolute inset-0 bg-red-200 opacity-50  rounded-full "></span>
 										<button onclick="" class="relative ">Delete</button>
 									</form>
-								</td>
 								@endrole
+								</td>
 							</tr>@endforeach
 
 						</tbody>

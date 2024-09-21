@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('tmdb_id')->unique();
             $table->string('name');
-            $table->string('birthday');
+            $table->string('birthday')->nullable();
             $table->string('slug');
             $table->string('poster_path');
             $table->timestamps();

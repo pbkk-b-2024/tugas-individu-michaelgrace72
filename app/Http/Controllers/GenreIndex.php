@@ -20,8 +20,9 @@ class GenreIndex extends Controller
     public function store(Request $request)
     {
         $input = $request->input('TMDBID');
+        $api_key = env('TMDB_API_KEY');
         try {
-            $response = Http::get('https://api.themoviedb.org/3/genre/'.$input.'?api_key=902916f571ab9c1ffc7e94a6cced1cc1');
+            $response = Http::get('https://api.themoviedb.org/3/genre/'.$input.'?api_key='.$api_key);
             $genreexists = Genre::where('tmdb_id', $input)->first();
             if ($genreexists) {
                 return redirect()->route('admin.genres.index')

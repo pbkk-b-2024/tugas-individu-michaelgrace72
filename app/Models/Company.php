@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
+    protected $fillable = ['tmdb_id', 'name', 'slug', 'logo_path', 'origin_country'];
 }

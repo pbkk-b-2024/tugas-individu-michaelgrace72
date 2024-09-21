@@ -19,9 +19,10 @@ class CastIndex extends Controller
     }
     public function generateCast(Request $request){
         $input = $request->input('TMDBID');
+        $api_key = env('TMDB_API_KEY');
         try {
             //code...
-            $response = Http::get('https://api.themoviedb.org/3/person/'.$input.'?api_key=902916f571ab9c1ffc7e94a6cced1cc1');
+            $response = Http::get('https://api.themoviedb.org/3/person/'.$input.'?api_key='.$api_key);
 
             $existingCast = Cast::where('tmdb_id', $input)->first();
             if ($existingCast) {
@@ -33,7 +34,7 @@ class CastIndex extends Controller
                 'tmdb_id' => $newCast['id'],
                 'name' => $newCast['name'],
                 'slug' => Str::slug($newCast['name']),
-                // 'birthday' => $newCast['birthday'],
+                'birthday' => $newCast['birthday'],
                 'poster_path' => $newCast['profile_path'],
             ]);
             return redirect()->route('admin.casts.index')

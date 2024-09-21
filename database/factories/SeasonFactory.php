@@ -18,7 +18,7 @@ class SeasonFactory extends Factory
     {
         return [
             //
-             'tmdb_id' => $this->faker->unique()->randomNumber(6),
+            'tmdb_id' => $this->faker->unique()->randomNumber(6),
             'series_id' => \App\Models\Series::factory(),
             'name' => $this->faker->sentence(2),
             'season_number' => $this->faker->numberBetween(1, 10),

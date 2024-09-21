@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('slug');
             $table->timestamps();
         });
-        Schema::create('taggables', function (Blueprint $table) {
-            $table->integer('tag_id');
-            $table->integer('taggable_id');
-            $table->string('taggable_type');
-        });
+        // Schema::create('taggables', function (Blueprint $table) {
+        //     $table->integer('tag_id');
+        //     $table->integer('taggable_id');
+        //     $table->string('taggable_type');
+        // });
     }
 
     /**

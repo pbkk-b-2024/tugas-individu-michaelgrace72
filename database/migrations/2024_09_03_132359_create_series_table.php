@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('created_year')->nullable();
             $table->string('poster_path');
-            $table->decimal('rating', 8,1);
-            $table->string('status');
+            $table->decimal('rating', 8,3);
             $table->bigInteger('visits')->default(1);
             $table->timestamps();
         });

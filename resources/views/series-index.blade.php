@@ -79,7 +79,7 @@
 								</td>
 								@role('admin')
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<a href="{{ route('admin.seasons.index', $serie->tmdb_id)}}" class="relative inline-block px-3 py-1 font-semibold text-blue-900 leading-tight rounded-full hover:bg-blue-500" >
+									<a href="{{ route('admin.seasons.index', $serie->id)}}" class="relative inline-block px-3 py-1 font-semibold text-blue-900 leading-tight rounded-full hover:bg-blue-500" >
 										<span aria-hidden class="absolute inset-0 bg-blue-200 opacity-50 rounded-full"></span>
 										<button class="relative">Season</button>
 									</a>

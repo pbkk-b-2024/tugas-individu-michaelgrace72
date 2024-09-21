@@ -67,12 +67,13 @@ class SeasonIndex extends Controller
     }
     public function index(Request $request, $seriesID)
     {
+        $series = Series::find($seriesID);
         $search = $request->input('search');
-        $seasons = Season::when($search, function ($query, $search) {
+        $seasons = Season::where('series_id', $series->id)->when($search, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%');
         })->paginate(5);
         // Send data to the view
-        return view('season-index', compact('seasons', 'seriesID'));
+        return view('season-index', compact('seasons', 'series'));
 
     }
 }

@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
+use Http;
+use Str;
 class MovieIndex extends Controller
 {
     public $search='';
+    public $TMDBID ='';
     public function index(Request $request)
     {
         $search = $request->input('search');
@@ -24,21 +27,36 @@ class MovieIndex extends Controller
     }
     public function store(Request $request)
     {
-        $validated = $request->validate([
-        'tmdb_id' => 'required|string',
-        'title' => 'required|string|max:255',
-        'release_date' => 'required|date',
-        'runtime' => 'required|integer',
-        'lang' => 'required|string', // Ensure it's a 3-character language code
-        'video_format' => 'required|string', // Assuming video format length is within 10 characters
-        'slug' => 'required|string|',
-        'rating' => 'required|numeric|between:0,10',
-        'poster_path' => 'required|string',
-        'overview' => 'required|string', 
-        ]);
+        $input = $request->input('TMDBID');
+        $api_key = env('TMDB_API_KEY');
+        try {
+            $response = Http::get('https://api.themoviedb.org/3/movie/'.$input.'?api_key='.$api_key);
+            $existingMovie = Movie::where('tmdb_id', $input)->first();
+            if ($existingMovie) {
+                return redirect()->route('admin.movies.index')
+                    ->with('error', 'Movie already exists.');
+            }
+            $newMovie = $response->json();
+            Movie::create([
+                'tmdb_id' => $newMovie['id'],
+                'title' => $newMovie['title'],
+                'release_date' => $newMovie['release_date'],
+                'runtime' => $newMovie['runtime'],
+                'lang' => $newMovie['original_language'],
+                'video_format' => $newMovie['video'],
+                'slug' => Str::slug($newMovie['title']),
+                'rating' => $newMovie['vote_average'],
+                'poster_path' => $newMovie['poster_path'],
+                'overview' => $newMovie['overview'],
+            ]);
+            return redirect()->route('admin.movies.index')
+                ->with('success', 'Movie created successfully');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->route('admin.movies.index')
+                ->with('error', 'Movie not found');
+        }
 
-        Movie::create($validated);
-        return redirect()->route('admin.movies.index')->with('success', 'Movie created successfully');
     }
     public function edit($id)
     {

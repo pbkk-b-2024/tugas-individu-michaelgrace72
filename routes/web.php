@@ -21,15 +21,30 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->prefix('/admin')->name('admin.')->group(function () {
 
     Route::get('/',[AdminController::class, 'index'])->name('index');
+    
     Route::get('movies', [MovieIndex::class, 'index'])->name('movies.index');
+    Route::get('movies/{id}/overview', [MovieIndex::class, 'show'])->name('movies.show');
 
     Route::get('series', [SeriesIndex::class, 'index'])->name('series.index');
+    Route::get('series/{id}/overview', [SeriesIndex::class, 'show'])->name('series.show');
+
     Route::get('series/{serie}/seasons', [SeasonIndex::class, 'index'])->name('seasons.index');
+    Route::get('series/{serie}/seasons/{season}/overview', [SeasonIndex::class, 'show'])->name('seasons.show');
+
     Route::get('casts', [CastIndex::class, 'index'])->name('casts.index'); 
+    Route::get('casts/{id}/overview', [CastIndex::class, 'show'])->name('casts.show');
+
     Route::get('genres', [GenreIndex::class, 'index'])->name('genres.index');
+    Route::get('genres/{id}/overview', [GenreIndex::class, 'show'])->name('genres.show');
+
     Route::get('tags', [TagIndex::class, 'index'])->name('tags.index');
+    Route::get('tags/{id}/overview', [TagIndex::class, 'show'])->name('tags.show');
+
     Route::get('producers', [ProducerIndex::class, 'index'])->name('producers.index');
+    Route::get('producers/{id}/overview', [ProducerIndex::class, 'show'])->name('producers.show');
+
     Route::get('companies', [CompanyIndex::class, 'index'])->name('companies.index');
+    Route::get('companies/{id}/overview', [CompanyIndex::class, 'show'])->name('companies.show');
 });
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified', 'role:admin'])->prefix('/admin')->name('admin.')->group(function () {
     //movies
@@ -92,17 +107,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified', '
 });
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {
-    Route::get('/assign-role', function () {
-        $user = auth()->user();
-
-        if ($user) {
-            $user->assignRole('admin');
-            return 'Role assigned successfully';
-        }
-
-        return 'User not found';
-    })->name('assign.role');
     Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+        if(auth()->user()->hasRole('admin')){
+            return redirect()->route('admin.index');
+        }
+        return view('dashboard');})->name('dashboard');
 });
