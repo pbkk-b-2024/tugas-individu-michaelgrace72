@@ -17,9 +17,10 @@ class SeasonIndex extends Controller
         return view('season-create', compact('seriesID') );
     }
     public function store(Request $request, $seriesID){
+        $api_key = env('TMDB_API_KEY');
         $seasonID = $request->input('TMDBID');
         try {
-            $response = Http::get('https://api.themoviedb.org/3/tv/'.$seriesID.'/season/'.$seasonID.'?api_key=902916f571ab9c1ffc7e94a6cced1cc1');
+            $response = Http::get('https://api.themoviedb.org/3/tv/'.$seriesID.'/season/'.$seasonID.'?api_key='.$api_key);
             $seasonexists = Season::where('tmdb_id', $seasonID)->first();
             if ($seasonexists) {
                 return redirect()->route('admin.seasons.index')
