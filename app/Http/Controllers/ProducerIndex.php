@@ -80,4 +80,76 @@ class ProducerIndex extends Controller
         Producer::destroy($id);
         return redirect()->route('admin.producers.index')->with('success', 'Producer deleted successfully');
     }
+
+    // API Request
+    public function showall(){
+        $producers = Producer::all();
+        return response()->json($producers);
+    }
+    public function show($id){
+        $producer = Producer::find($id);
+        return response()->json($producer);
+    }
+    public function storeapi(Request $request){
+        $user = auth()->user();
+        if(!$user->hasRole('admin')){
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+        $input = $request->input('TMDBID');
+        $existingProducer = Producer::where('tmdb_id', $input)->first();
+        if ($existingProducer) {
+            return response()->json(['message' => 'Producer already exists.'], 400);
+        }
+        $api_key = env('TMDB_API_KEY');
+        try {
+            $response = Http::get('https://api.themoviedb.org/3/person/'.$input.'?api_key='.$api_key);
+            $newProducer = $response->json();
+            Producer::create([
+                'tmdb_id' => $newProducer['id'],
+                'name' => $newProducer['name'],
+                'slug' => Str::slug($newProducer['name']),
+                'role' => $newProducer['known_for_department'],
+                'poster_path' => $newProducer['profile_path'],
+            ]);
+            return response()->json(['message' => 'Producer created successfully', $newProducer], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Producer not found'], 404);
+        }
+    }
+    public function updateapi(Request $request, $id)
+    {
+        $user = auth()->user();
+        if (!$user->hasRole('admin')) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+        $input = $request->input('TMDBID');
+        $api_key = env('TMDB_API_KEY');
+        if ($existingProducer = Producer::where('tmdb_id', $input)->first()) {
+            return response()->json(['message' => 'Producer already exists.'], 400);
+        }
+        try {
+            $response = Http::get('https://api.themoviedb.org/3/person/'.$input.'?api_key='.$api_key);
+            $newProducer = $response->json();
+            $producer = Producer::findOrFail($id);
+            $producer->update([
+                'tmdb_id' => $newProducer['id'],
+                'name' => $newProducer['name'],
+                'slug' => Str::slug($newProducer['name']),
+                'role' => $newProducer['known_for_department'],
+                'poster_path' => $newProducer['profile_path'],
+            ]);
+            return response()->json(['message' => 'Producer updated successfully.', $newProducer], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Producer not found.'], 404);
+        }
+    }
+    public function deleteapi($id){
+        $user = auth()->user();
+        if (!$user->hasRole('admin')) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+        $producer = Producer::find($id);
+        $producer->delete();
+        return response()->json(['message' => 'Producer deleted successfully.'], 200);
+    }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\ProducerIndex;
 use App\Http\Controllers\SeasonIndex;
 use App\Http\Controllers\SeriesIndex;
 use App\Http\Controllers\TagIndex;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -112,4 +113,10 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
             return redirect()->route('admin.index');
         }
         return view('dashboard');})->name('dashboard');
+    Route::get('/documentation', function () {
+        return view('documentation');
+    })->name('documentation');
+    Route::post('/user/api-key/regenerate', [UserController::class, 'generateApiKey'])
+    ->name('user.api-key.regenerate')
+    ->middleware('auth');
 });

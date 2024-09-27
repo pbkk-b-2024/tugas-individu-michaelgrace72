@@ -99,10 +99,17 @@ class MovieIndex extends Controller
     public function show($id)
     {
         $movie = Movie::find($id);
+        if (!$movie) {
+            return response()->json(['message' => 'Movie not found'], 404);
+        }
         return response()->json($movie);
     }
     public function storeapi(Request $request)
     {
+        $user = auth()->user();
+        if (!$user->hasRole('admin')) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
         $input = $request->input('TMDBID');
         $api_key = env('TMDB_API_KEY');
         try {
@@ -131,6 +138,10 @@ class MovieIndex extends Controller
     }
     public function updateapi(Request $request, $id)
     {
+        $user = auth()->user();
+        if (!$user->hasRole('admin')) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
         $validated = $request->validate([
             'tmdb_id' => 'required|string',
             'title' => 'required|string|max:255',
@@ -149,6 +160,10 @@ class MovieIndex extends Controller
     }
     public function deleteapi($id)
     {
+        $user = auth()->user();
+        if (!$user->hasRole('admin')) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
         $movie = Movie::find($id);
         $movie->delete();
         return response()->json(['message' => 'Movie deleted successfully', $movie], 200);

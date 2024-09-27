@@ -67,6 +67,7 @@
                 @role('admin')
                 <a href=" {{ route('admin.index')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Admin</a>
                 @endrole
+                <a href=" {{ route('documentation')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Documentation</a>
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
 
