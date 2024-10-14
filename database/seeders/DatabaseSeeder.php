@@ -37,5 +37,9 @@ class DatabaseSeeder extends Seeder
         // Genre::factory()->count(30)->create();
         // Tag::factory()->count(30)->create();
         $this->call(RoleSeeder::class);
+        $this->call(CastsApitSeeder::class);
+        $this->call(CompaniesApiSeeder::class);
+        $this->call(MovieApiSeeder::class);
+        $this->call(SeriesApiSeeder::class);
     }
 }

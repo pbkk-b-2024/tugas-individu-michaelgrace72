@@ -17,7 +17,7 @@ class MovieApiSeeder extends Seeder
     public function run(): void
     {
         $api_key = env('TMDB_API_KEY');
-        for ($tmdbid = 500; $tmdbid <= 501; $tmdbid++) {
+        for ($tmdbid = 1; $tmdbid <= 1001; $tmdbid++) {
                 try {
                     $response = Http::get('https://api.themoviedb.org/3/movie/'.$tmdbid.'?api_key='.$api_key);
                     if ($response->failed()) {

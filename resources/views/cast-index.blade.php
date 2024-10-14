@@ -38,13 +38,10 @@
 									Name
 								</th>
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Birthday
-								</th>
-								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Slug
-								</th>
-								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                   Poster
+								</th>
+								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Birthday
 								</th>
 								@role('admin')
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -66,18 +63,14 @@
 									</div>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">
-									{{ $cast->birthday}}</p>
-								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">
-									{{ $cast->slug }}	
-									</p>
-								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<img class="w-20 h-28 border-slate-700 rounded hover:shadow-slate-600 hover:scale-110 text-gray-900 whitespace-no-wrap" src="https://image.tmdb.org/t/p/w500{{ $cast->poster_path}}">
 									</img>
 								</td>
+								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+									<p class="text-gray-900 whitespace-no-wrap">
+									{{ $cast->birthday}}</p>
+								</td>
+							
 								@role('admin')
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<a  href="{{ route('admin.casts.edit', $cast->id)}}" class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight rounded-full hover:bg-green-500">

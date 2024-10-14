@@ -18,7 +18,7 @@ class SeriesApiSeeder extends Seeder
     {
         //
         $api_key = env('TMDB_API_KEY');
-        for ($tmdbid = 3506; $tmdbid <= 4000; $tmdbid++) {
+        for ($tmdbid = 1; $tmdbid <= 1000; $tmdbid++) {
                 try {
                     $response = Http::get('https://api.themoviedb.org/3/tv/'.$tmdbid.'?api_key='.$api_key);
                     if ($response->failed()) {

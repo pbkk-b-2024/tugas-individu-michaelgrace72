@@ -21,7 +21,7 @@
           </div>
 				<div class="lg:ml-40 ml-10 space-x-8">
            <form id="" action="{{ route('admin.producers.create')}}">
-            <x-button>Add Movie</x-button>
+            <x-button>Add Producer</x-button>
 					</form>
 				</div>
 			</div>
@@ -33,16 +33,13 @@
 						<thead>
 							<tr>
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-									TMDB ID
-								</th>
-								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                   Name
 								</th>
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Roles
+                  Poster
 								</th>
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Poster
+                  Roles
 								</th>
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
 									Manage
@@ -54,23 +51,17 @@
 							
 							<tr>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<div class="flex items-center ml-3">
-												<p class="text-gray-900 whitespace-no-wrap">
-												{{ $producer->tmdb_id }}	
-												</p>
-									</div>
-								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">{{ $producer->name}}</p>
+								</td>
+								
+								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+									<img class="w-20 h-28 border-slate-700 rounded hover:shadow-slate-600 hover:scale-110 text-gray-900 whitespace-no-wrap" src="https://image.tmdb.org/t/p/w500{{ $producer->poster_path}}">
+									</img>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap">
 									{{ $producer->role }}	
 									</p>
-								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<img class="w-20 h-28 border-slate-700 rounded hover:shadow-slate-600 hover:scale-110 text-gray-900 whitespace-no-wrap" src="https://image.tmdb.org/t/p/w500{{ $producer->poster_path}}">
-									</img>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<a  href="{{ route('admin.producers.edit', $producer->id)}}" class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight rounded-full hover:bg-green-500">

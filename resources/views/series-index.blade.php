@@ -39,13 +39,13 @@
 									Title
 								</th>
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                  Slug
-								</th>
-								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                   Poster
 								</th>
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                   Start Date
+								</th>
+								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  Rating
 								</th>
 								@role('admin')
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -66,9 +66,6 @@
 									</div>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap">{{ $serie->slug}}</p>
-								</td>
-								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<img class="w-20 h-28 border-slate-700 rounded hover:shadow-slate-600 hover:scale-110 text-gray-900 whitespace-no-wrap" src="https://image.tmdb.org/t/p/w500{{$serie->poster_path}}">
 									</img>
 								</td>
@@ -77,6 +74,10 @@
 									{{ $serie->created_year}}
 									</p>
 								</td>
+								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+									<p class="text-gray-900 whitespace-no-wrap">{{ $serie->rating}}</p>
+								</td>
+								
 								@role('admin')
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<a href="{{ route('admin.seasons.index', $serie->id)}}" class="relative inline-block px-3 py-1 font-semibold text-blue-900 leading-tight rounded-full hover:bg-blue-500" >
